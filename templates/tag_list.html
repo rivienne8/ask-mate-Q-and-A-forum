@@ -1,0 +1,36 @@
+{% extends "index.html" %}
+
+{% block page_title %}
+    Tags List
+{% endblock %}
+{% block content %}
+<div>
+<a href="{{ url_for('login_user') }}" onclick="alert('Npppppp!');"></a>
+    <table border="1">
+        <thead>
+            <tr>
+                {% for i in range(tag_headers|length) %}
+                    <th>
+                        {{ tag_headers[i] }}
+                        <a href="{{ url_for("tags_page", order_by=tag_keys[i], order_direction="asc") }}">&#8679</a>
+                        <a href="{{ url_for("tags_page", order_by=tag_keys[i], order_direction="desc") }}">&#8681</a>
+                    </th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for tag in tags %}
+                <tr>
+                    {% for key in tag_keys %}
+                        <td>
+                            <a href="{{url_for("tag_questions_search", tag_id=tag["id"]) }}">  {{tag[key]}}</a>
+
+                        </td>
+
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+   </table>
+</div>
+{% endblock %}

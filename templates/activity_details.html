@@ -1,0 +1,39 @@
+{% for item in  activity   %}
+                <div class="message_box">
+
+                    <div class="info_row">
+                        <div>{{ item.submission_time }}</div>
+                        {% if item.view_number %}
+                        <div>Views: {{ item.view_number }}</div>
+                        {% endif %}
+                        {% if item.vote_number %}
+                        <div>Votes: {{ item.vote_number }}</div>
+                        {% endif %}
+                        {% if item.edited_count %}
+                        <div>Edited {{ item.edited_count }} time(s)</div>
+                        {% endif %}
+                        {% if item.image is defined %}
+                        <div>Picture:
+                            {% if item.image %}
+                                Yes
+                            {% else %}
+                                No
+                            {% endif %}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div>
+                        {% if item.question_id != None %}
+                        <a href="{{ url_for('display_question', question_id = item.question_id) }}">
+                            <h5>{{ item.title }}</h5>
+                            <div class="hidden_overflow">{{ item.message }}</div>
+                        </a>
+                        {% else %}
+                            <div class="hidden_overflow">{{ item.message }}</div>
+                        {% endif %}
+                    </div>
+
+
+                </div>
+            {% endfor %}

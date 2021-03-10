@@ -1,0 +1,41 @@
+{% extends "index.html" %}
+
+{% block page_title %}
+    Searched Questions
+{% endblock %}
+{% block content %}
+    {% for question in questions %}
+        <div class="question">
+            <div class="title_box">
+                <h2><a href="{{url_for("display_question", question_id=question["id"]) }}"> {{ question.title.lower().replace(search_phrase.lower(), '<span style="background-color: yellow;">{}</span>'.format(search_phrase.lower()))|safe }} </a></h2>
+            </div>
+            <div class="message_box">
+                <div class="info_row">
+                    <div>Submission time: {{ question.submission_time }}</div>
+                    <div>Numbers of views: {{ question.view_number }}</div>
+                    <div>Vote's number: {{ question.vote_number }}</div>
+                </div>
+                <p class="message">
+                        <h4>{{ question.message.lower().replace(search_phrase.lower(), '<span style="background-color: yellow;">{}</span>'.format(search_phrase.lower()))|safe}}</h4>
+                </p>
+        </div>
+
+</div>
+        {% if question["id"] in answers %}
+            {% for answer in answers[question["id"]] %}
+                <div class="message_boxx">
+                    <div class="info_row">
+                        <div>Submission time: {{ answer.submission_time }}</div>
+                        <div>Vote's number: {{ answer.vote_number }}</div>
+                    </div>
+                        <p class="message"><h4>{{ answer["message"].lower().replace(search_phrase.lower(),'<span style="background-color: yellow;">{}</span>'.format(search_phrase.lower()))|safe}}</h4></p>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+    {% endfor %}
+
+
+    <br>
+    <a href="{{url_for("main_page") }}"><button type="button">Back to Main Page</button></a>
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends "index.html" %}
+
+{% block page_title %}{% endblock %}
+
+{% block content %}
+
+<div class="main_div">
+    <div class="user_details">
+        <div class="key_info">
+            <div><h2>{{ user.mail }}</h2></div>
+            <div class="icon">{% include 'reputation.html' %}</div>
+            <div>Since: {{ user.submission_time }}</div>
+        </div>
+
+        <div>
+            <h3>Statistics</h3>
+            <table>
+            <tr>
+                <td>Number of added questions:</td>
+                <td>{{ user.questions_number }}</td>
+            </tr>
+            <tr>
+                <td>Number of added answers:</td>
+                <td>{{ user.answers_number }}</td>
+            </tr>
+            <tr>
+                <td>Number of added comments:</td>
+                <td>{{ user.comments_number }}</td>
+            </tr>
+            </table>
+        </div>
+    </div>
+
+
+    <div class="question">
+        <h3>Questions</h3>
+
+        {% if user.questions_number > 0 %}
+        <div >
+
+            {% with activity=activities.questions %}
+            {% include "activity_details.html" %}
+            {% endwith %}
+
+        </div>
+        {% endif %}
+
+    <h3>Answers</h3>
+
+        {% if user.answers_number > 0 %}
+        <div>
+            {% with activity=activities.answers %}
+            {% include "activity_details.html" %}
+            {% endwith %}
+        </div>
+        {% endif %}
+
+    <h3>Comments</h3>
+
+        {% if user.comments_number > 0 %}
+        <div>
+            {% with activity=activities.comments %}
+            {% include "activity_details.html" %}
+            {% endwith %}
+        </div>
+        {% endif %}
+
+    </div>
+
+
+
+</div>
+
+
+
+
+{% endblock %}

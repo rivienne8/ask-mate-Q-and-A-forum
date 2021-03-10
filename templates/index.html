@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://kit.fontawesome.com/05de84e1ca.js" crossorigin="anonymous"></script>
+    <title>{% block page_title %}How can I answer you?{% endblock %} - Question Forum</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+<div class="content-wrapper">
+    <header>
+        <a id="header-title" href="{{url_for("main_page") }}">Question Forum</a>
+
+       {% if session[username] %}
+           <div class='header_link'>
+                <a href="{{ url_for("display_user", user_id = session['user_id']) }}">{{ session[username] }}</a>
+                {% with user=session['reputation'] %}{% include 'reputation.html' %}{% endwith %}
+           </div>
+           <div class='header_link' id="logged_user">
+                <a href="{{ url_for("display_users") }}">USERS LIST</a>
+            </div>
+        {% endif %}
+
+
+        <div class='header_link' id="signup">
+            {% if session[username] %}
+                <a href="{{ url_for('logout') }}">Logout</a>
+            {% else %}
+                <a href="{{ url_for("login_user") }}">Log In</a>
+            {% endif %}
+                /
+                <a href="{{ url_for("registration_user") }}">Sign Up</a>
+        </div>
+
+{# ten div logger_user powinien być z danymi użytkownika po zalogowaniu i z dostępnym linkiem do users page
+np.: display: flex, zawartość: mail, reputation, menu dostęne dla zalogowanego uzytkownika(linki) #}
+
+
+    </header>
+
+
+    <section>
+        <h2 class="title text-center">{{ self.page_title() }}</h2>
+    </section>
+
+{% block content %}
+{#    <h1>Question Forum</h1>#}
+    <div class="search">
+        <form action="{{url_for("display_search_question")}}">
+{#            <label for="search_input">Search on forum:</label>#}
+            <input class="search" type="text" name="search" placeholder="Search">
+            <button type="submit" class="search_arrow">&rarr;</button>
+        </form>
+    </div>
+{#    <h3>Last questions</h3>#}
+    <div>
+        <table border="1">
+        <thead>
+            <tr>
+                {% for i in range(headers|length) %}
+                    <th>
+                        {{ headers[i] }}
+                    </th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for question in questions %}
+                <tr>
+                    {% for key in story_keys %}
+                        <td>
+                            {% if key == "message" %}
+                                {{ question[key][0:50] }}
+                            {% elif key == "title" %}
+                                <a id="title_cell" href="{{url_for("display_question", question_id=question["id"]) }}">{{question[key]}}</a>
+                            {% else %}
+                                {{ question[key] }}
+                            {% endif %}
+
+                        </td>
+                    {% endfor %}
+                </tr>
+
+            {% endfor %}
+
+        </tbody>
+    </table>
+    </div>
+    <div>
+        <a href="{{url_for("question_page") }}"><button type="button" class="forward">&rarr; All questions</button></a>
+    </div>
+     <div>
+        <a href="{{url_for("tags_page") }}"><button type="button" class="forward">&rarr; All tags</button></a>
+    </div>
+{% endblock %}
+</div>
+
+{% include 'footer.html' %}
+</body>

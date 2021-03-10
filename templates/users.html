@@ -1,0 +1,45 @@
+{% extends "index.html" %}
+
+{% block page_title %}{% endblock %}
+
+{% block content %}
+
+<div class="main_div">
+    <div class="title">
+        <h2>List of Users</h2>
+    </div>
+        <div class="main background_color">
+                <div class="row_tab_head">
+{#                {% for header in table_headers %}#}
+                    <div class="table_headers user_id">Id</div>
+                    <div class="table_headers user_mail">User Name</div>
+                    <div class="table_headers">Reputation</div>
+                    <div class="table_headers">Register date</div>
+                    <div class="table_headers">Added questions</div>
+                    <div class="table_headers">Added answers</div>
+                    <div class="table_headers">Added comments</div>
+
+{#                {% endfor %}#}
+                </div>
+            {% for user in users %}
+            <div class="table_row">
+                <div class="table_cell user_id">{{ user.id }}</div>
+                <div class="table_cell user_mail">
+                    <a href="{{ url_for('display_user', user_id= user.id) }}">{{ user.mail }}</a></div>
+                {% include 'reputation.html' %}
+                <div class="table_cell user_submission">{{ user.submission_time }}</div>
+                <div class="table_cell ">{{ user.questions_number }}</div>
+                <div class="table_cell ">{{ user.answers_number }}</div>
+                <div class="table_cell">{{ user.comments_number }}</div>
+
+            </div>
+        {% endfor %}
+        </div>
+
+{#        </div>#}
+
+</div>
+
+
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'layout_comment.html' %}
+
+
+{% block page_title %} Add comment to {{ item_type }} {% endblock %}
+
+
+{% block item %}
+    <h3>{{ item_type }}:</h3>
+    <p>{{ item.message }}</p>
+{% endblock %}
+
+{% block action %}action="{{ url }}"{% endblock %}
+
+{#{% block message %}Write your comment to {{ item_type }}:{% endblock %}#}
+
+{% block hidden %}name="{{ item_type }}_id" value="{{ item.id }}"{% endblock %}
+
+

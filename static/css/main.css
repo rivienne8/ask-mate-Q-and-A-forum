@@ -1,0 +1,634 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, input, button {
+    font-family: "Heiti SC", sans-serifserif;
+    color: #444747;
+}
+
+body {
+    height: 100vh;
+
+    background-image: url('../images/ocean.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+
+.content-wrapper, footer {
+        background-color: rgba(200, 195, 195, 0.8);
+}
+
+.content-wrapper {
+    align-self: flex-end;
+    border-radius: 5px;
+    width: 90vw;
+    max-width: 1000px;
+    height: 80vh;
+    margin-bottom: 6vh;
+    padding: 25px;
+
+    display: flex;
+    flex-direction: column;
+    /*overflow: scroll;*/
+    overflow: auto;
+}
+
+header {
+    margin-top: 5vh;
+    color: #31434f;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    width: 100vw;
+    justify-content: space-between;
+
+}
+
+.header_link {
+    background-color: rgba(200, 195, 195, 0.8);
+    padding: 10px;
+    margin-left: 3vw;
+    align-self: center;
+    display: flex;
+}
+
+.header_link .table_cell {
+    padding: 0;
+}
+
+#header-title {
+    text-transform: capitalize;
+    text-decoration: none;
+    font-size: 36px;
+    padding: 5px;
+    background-color: rgba(200, 195, 195, 0.8);
+    margin-right: auto;
+}
+
+
+h2 {
+    margin: 10px 0;
+}
+
+h3 {
+    margin-top: 1%;
+    text-transform: capitalize;
+}
+
+h4 {
+    line-height: 130%;
+    font-weight: normal;
+    text-align: justify;
+    width: 90%;
+    /*margin: 0 auto;*/
+}
+
+h5 {
+    /*font-size: 1%;*/
+    margin-top: 0.5em;
+    }
+
+h5::first-letter {
+    text-transform: capitalize;
+}
+
+div.search {
+    border-bottom: 2px solid #444747;
+    margin: 15px 0;
+}
+
+div.image {
+    border: 1px solid #444747;
+    box-sizing: border-box;
+    padding: 2%;
+}
+
+div.file, div.url {
+    width: 49%;
+    display: inline-block;
+}
+
+div.file label, div.url label {
+    margin-top: 0;
+}
+
+
+input {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+}
+
+input.underline {
+    border-bottom: 2px solid #444747;
+}
+
+input.search {
+    width: 90%;
+}
+
+button, input[name='file']{
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    color: #444747;
+}
+
+
+
+button.search_arrow {
+    font-size: 20px;
+    float: right;
+}
+button.search_arrow:hover {
+    font-weight: bolder;
+}
+
+button[type="submit"]:hover, button[type="button"]:hover {
+    /*font-weight: bold;*/
+    text-decoration: underline;
+}
+
+.forward {
+    margin: 10px 0;
+    font-size: 16px;
+    text-align: left;
+    width: auto;
+    cursor: pointer;
+    text-transform: capitalize;
+}
+.forward:hover {
+    text-decoration: underline;
+}
+
+
+label, p {
+    display: block;
+    margin: 15px 0 5px;
+    line-height: 1.4;
+}
+
+p {
+    text-align: justify;
+    width: 90%;
+}
+
+textarea {
+    background-color: transparent;
+    border: 1px solid #444747;
+    padding: 5px;
+    width: 100%;
+    height: 20vh;
+    resize: none;
+    overflow: auto;
+    font-family: "Heiti SC", sans-serifserif;
+    font-size: 16px;
+    line-height: 120%;
+    color: #444747;
+}
+
+
+a {
+    color: #444747;
+    text-decoration: none;
+    text-transform: lowercase;
+}
+
+
+a:hover {
+    text-decoration: underline;
+}
+
+.far:hover {
+    font-weight: bold;
+              }
+
+
+
+table {
+    border: 1px solid #444747;
+    table-layout: fixed;
+    width: 100%;
+    word-break: break-word;
+}
+th {
+    border: none;
+    padding: 0.5rem;
+    text-align:center;
+    white-space: nowrap;
+}
+td {
+    border: none;
+    padding: 0.5rem;
+    text-align:center;
+}
+
+.main_div {
+    border-radius: 5px;
+    /*background-color: rgb(245, 227, 129);*/
+    /*border: rgb(95, 21, 21) solid 3px;*/
+    /*margin-left: 5%;*/
+    /*margin-right: 5%;*/
+    display: flex;
+    flex-direction: column;
+    /* flex-wrap: wrap; */
+    /*padding: 3em;*/
+    height: 100%;
+    width: 100%;
+        }
+
+.main {
+    border-radius: 5px;
+    /*background-color: rgb(241, 201, 115);*/
+    /*border: rgb(95, 21, 21) solid 2px;*/
+    display: flex;
+    flex-direction: column;
+    /* flex-wrap: wrap; */
+    /* padding: 2em; */
+    min-height: 80%;
+}
+
+.question, .answer {
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    /*flex-wrap: wrap; */
+    /* height: 90%; */
+    /*background-color: rgb(42, 184, 77);*/
+    /*border: solid 3px rgb(14, 59, 7);*/
+    /*font-size: 20px; */
+}
+
+/*.title_box {*/
+/*    font-size: 140%;*/
+/*}*/
+
+h3.title_box {
+    margin: 1em 0;
+}
+
+/*.answer .title_box {*/
+/*    font-size: 200%;*/
+/*}*/
+
+/*.answer .comment .title_box {*/
+/*    font-size: 140%;*/
+/*}*/
+
+.info_row {
+    display: flex;
+    flex-direction: row ;
+    flex-wrap: wrap;
+
+    /* flex: 1; */
+    align-items: center;
+    justify-content: space-between;
+     font-size: 90%;
+    /*padding: 1em 1em;*/
+}
+
+.comment .info_row {
+    justify-content: flex-end;
+}
+
+.answer .info_row {
+    font-size: 85%;
+}
+
+.comment .info_row {
+    font-size: 80%;
+
+}
+
+.info_row button {
+    font-size: 90%;
+    float: none;
+}
+
+.info_row .table_cell {
+    padding: 0;
+    flex: auto;
+}
+
+.flex_row {
+    display: flex;
+}
+
+
+.message_box {
+    background-color: rgba(233, 219, 219, 0.6);
+    border-radius: 5px;
+    padding: 1% 3% 0 3%;
+    /*border: solid 3px rgb(192, 103, 2);*/
+    /*margin-left: 4rem;*/
+    margin: 0 10%;
+    margin-bottom: 1em;
+    width: 80%;
+
+
+}
+.message_boxx {
+    background-color: rgba(233, 219, 219, 0.6);
+    border-radius: 5px;
+    padding: 1% 3% 0 3%;
+    /*border: solid 3px rgb(192, 103, 2);*/
+    width: 75%;
+    margin-left: 15%;
+    margin-bottom: 1em;
+}
+.comment .message_box {
+    margin-bottom: 0.4em;
+}
+
+.comment p {
+    margin: 0;
+}
+
+.comment .far, .tag_row .far {
+    font-size: 80%;
+    /*margin-left: 1rem;*/
+}
+
+.comment .info_row div {
+    margin-left: 1rem;
+}
+
+/*.answer .message {*/
+/*    font-weight:bold ;*/
+/*}*/
+
+.menu_row {
+    display: flex;
+    flex-direction: row ;
+    align-items: center;
+    justify-content: space-between;
+    /*background-color: rgb(151, 181, 158);*/
+    font-size: 90%;
+    padding: 1% 0%;
+    height: 2rem;
+}
+
+.answer .menu_row {
+    padding-left: 50%;
+}
+
+.comment .menu_row {
+    padding: 0 0 0 80%;
+
+}
+
+.tag_box {
+    display: flex;
+    border-radius: 5px;
+    background-color: rgba(245, 234, 234, 0.6);
+    margin-right: 3rem;
+}
+
+
+
+.tag_row {
+    display: flex ;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin-bottom: 0.5rem;
+    }
+
+.tag_row .tag {
+    margin-right: 0.4rem;
+}
+
+/*.tag_row div {*/
+/*    margin-right: 2rem;*/
+/*}*/
+
+.user_details {
+    display: flex ;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.user_details div {
+    flex: 1;
+    margin-right: 10%;
+
+}
+
+
+.key_info {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.key_info .icon {
+    font-size: 1.3em;
+    justify-content: flex-start;
+    /*width: 70%;*/
+    }
+
+.key_info .table_cell {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.key_info div {
+    text-align: center;
+}
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+}
+footer p {
+    margin: 0;
+    padding: 0;
+    line-height: 3vh;
+    font-size: 14px;
+    text-align: center;
+}
+
+i.far {
+    color: #444747;
+}
+
+img {
+    max-width: 90%;
+    margin: 0 auto;
+
+}
+
+
+#title_cell {
+    display: inline-block;
+}
+
+#title_cell::first-letter {
+    text-transform: uppercase;
+}
+
+
+.row_tab_head, .table_row {
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+    /*padding: 1em 0;*/
+    /*background-color: purple;*/
+}
+
+.background_color {
+    background-color: rgba(233, 219, 219, 0.6);
+    border-radius: 5px;
+    padding: 1% 3% 0 3%;
+    }
+
+
+.table_headers {
+    flex: 1;
+    text-align: center;
+    justify-items: center;
+    padding: 0.6em;
+    font-weight: bold;
+
+}
+
+.table_cell {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    justify-items: center;
+    padding: 0.6em;
+
+}
+
+.table_cell {
+    text-align: center;
+    justify-items: center;
+    padding: 1em;
+
+}
+
+.hidden_overflow {
+    /*white-space: nowrap;*/
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    /*-webkit-line-clamp: 2;*/
+    /*text-overflow: ellipsis;*/
+}
+
+/*h4 {*/
+/*    font-weight: bold;*/
+/*}*/
+
+.user_mail {
+    flex: 2;
+}
+
+.user_id {
+    flex: 0.5;
+}
+
+.user_reputation {
+    justify-items: flex-start;
+    margin-left: 0.5em;
+}
+
+.transparent_rep {
+    color: #7f8888;
+}
+
+.green_rep {
+    color: #34603b;
+}
+
+.yellow_rep {
+    color: #dbaa2d;
+
+}
+
+.blue_rep {
+    color: #353598;
+}
+
+
+
+
+
+/* w <a> data-tooltip="Edit"
+/*[data-tooltip]:before {*/
+/*    !*position : absolute;*!*/
+/*    position: relative;*/
+/*    top: 1rem;*/
+/*    right: 1rem;*/
+/*     content : attr(data-tooltip);*/
+/*     opacity : 0;*/
+/*}*/
+
+/*[data-tooltip]:hover:before {*/
+/*    opacity : 1;*/
+/*}*
+
+/
+ */
+
+/* The message box is shown when the user clicks on the password field */
+#message {
+  position: relative;
+  margin-top: 10px;
+}
+
+
+
+/* Add a green text color and a checkmark when the requirements are right */
+.valid {
+  color: green;
+}
+
+.valid:before {
+  position: relative;
+  content: "\2713 ";
+}
+
+/* Add a red text color and an "x" icon when the requirements are wrong */
+.invalid {
+  color: red;
+}
+
+.invalid:before {
+  position: relative;
+  content: "\2716";
+}
+
+.feedback-rejection {
+    color: #960101;
+    text-shadow: #868585 1px 1px 2px;
+    font-size: larger;
+}
+
+.feedback-warning {
+    color: #c808c5;
+    text-shadow: #868585 1px 1px 2px;
+    font-size: larger;
+}
+
+button[name='acceptance'] {
+    font-size: 1.4em;
+    color: darkolivegreen;
+}
+#accepted_False {
+    color: darkred;
+}

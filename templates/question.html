@@ -1,0 +1,254 @@
+
+
+{% extends "index.html" %}
+
+{% block page_title %}{{ question.title }}{% endblock %}
+
+{% block content %}
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div class="feedback-{{ category }}">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<div class="main_div">
+    <div class="main">
+
+        <div class="question">
+{#            <div class="title_box">#}
+{#                <div>#}
+{#                    <h3 class="title_box">{{ question.title }} </h3>#}
+{#                </div>#}
+{##}
+{#            </div>#}
+
+            <div class="message_box">
+                <div class="info_row">
+                    <div>{{ question.submission_time }}</div>
+                    {% if question.forum_user_id != None %}
+                        <div class="flex_row">{{ question.user_mail }}
+                        {% with user=question %}{% include "reputation.html" %} {% endwith %}</div>
+                    {% endif %}
+                    <div>Views: {{ question.view_number }}</div>
+                    <div>Voted: {{ question.vote_number }}</div>
+                    <div>
+                        <form action="{{ url_for("question_vote", question_id=question.id, forum_user = question.forum_user_id) }}" method="post">
+                            <button type="submit" id="vote_up" name = "vote_question" value="vote_up"> VOTE UP |</button>
+                            <button type="submit" id="vote_down" name = "vote_question" value="vote_down"> VOTE DOWN </button>
+                        </form>
+                    </div>
+
+
+                </div>
+
+                <p class="message">
+                    <h4>{{ question.message }}</h4>
+                        {% if question.image == 1 %}
+                            {% for image in question_image %}
+                                {% if 'http' not in image.image %}
+                                    <p>
+                                        <img src="{{ url_for('get_img', filename=get_filename(image.image)) }}" alt="picture added by user" >
+                                    </p>
+                                {% else %}
+                                    <p>
+                                        <img src="{{ image.image }}" alt="picture added by user" style="max-height: 25vw">
+                                    </p>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                </p>
+
+                <div class="tag_row">
+                    {% for tags in question_tag %}
+                    <div class="tag_box">
+                        <div class="tag">#{{ tags.name }}</div>
+                        <div>
+                            <a href="{{ url_for('delete_tag', tag_id=tags.id, question_id=question.id) }}"
+                           onclick="return confirm('Are you sure?')">
+                            <i class='far fa-trash-alt'></i></a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+
+
+                <div class="menu_row">
+                    <a href="{{ url_for("add_tag", question_id=question.id) }}">
+                        <button type="button" name="add_tag" id="add_question_tag">ADD TAG</button></a>
+                    <a href="{{ url_for("new_question_comment", question_id=question.id) }}">
+                        <button type="button" name="add_comment" id="add_question_comment">ADD COMMENT</button></a>
+                    <a href="{{ url_for("add_answer",question_id=question.id) }}">
+                        <button type="button" name="add_answer" id="add_answer" >ADD ANSWER</button></a>
+                    <a href="{{ url_for("edit_question_get",question_id=question["id"]) }}" ><i class='far fa-edit'></i></a>
+                    <a href="{{ url_for("delete_question", question_id = question["id"]) }}"><i class='far'>&#xf2ed</i></a>
+                </div>
+
+
+                {% if question_comments|length > 0 %}
+                    <div class="comment">
+                        <h3 class="title_box">Comments:</h3>
+                        {% for comment in question_comments %}
+                            {% if comment.question_id == question.id %}
+
+                            <div class="message_box">
+
+                                <div class="info_row">
+                                    <div>{{ comment.submission_time }}</div>
+                                    {% if comment.forum_user_id != None %}
+                                        <div class="flex_row">{{ comment.user_mail }}
+                                        {% with user=comment %}{% include "reputation.html" %}{% endwith %}</div>
+                                    {% endif %}
+                                        {% if comment.edited_count %}
+                                        <div>Edited {{ comment.edited_count }} time(s)</div>
+                                    {% endif %}
+                                    <div>
+                                    <a href="{{ url_for('update_comment_get', comment_id=comment.id) }}">
+                                        <i class='far fa-edit'></i>
+                                    </a></div>
+                                    <div>
+                                    <a href="{{ url_for('delete_comment', comment_id=comment.id) }}"
+                                       onclick="return confirm('Are you sure?')">
+                                        <i class='far fa-trash-alt'></i>
+                                    </a></div>
+
+                                </div>
+
+                                <div>
+                                    <p class="message">
+                                        {{ comment.message }}
+                                    </p>
+
+                                </div>
+
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+
+                    </div>
+                {% endif %}
+
+            </div>
+        </div>
+
+        {% if answers|length > 0 %}
+            <div class="answer">
+                <h3 class="title_box">Answers:</h3>
+
+                {% for answer in answers %}
+
+                    <div class="message_box">
+
+                        <div class="info_row">
+                            <div>{{ answer.submission_time }}</div>
+                            {% if answer.forum_user_id != None %}
+                                <div class="flex_row">{{ answer.user_mail }}
+                                {% with user=answer %}{% include "reputation.html" %}{% endwith %}</div>
+                            {% endif %}
+                            <div>Vote's number: {{ answer.vote_number }}</div>
+                            <div>
+                                <form action="{{ url_for("answer_vote", answer_id=answer.id, question_id=question["id"], forum_user=answer.forum_user_id) }}" method="post">
+                                    <button type="submit" id="vote_up" name = "vote_answer" value="vote_up"> VOTE UP |</button>
+                                    <button type="submit"  id="vote_down" name = "vote_answer" value="vote_down"> VOTE DOWN</button>
+                                </form>
+                            </div>
+
+                           <div>
+                               <form action="{{ url_for("accept_answer", answer_id=answer.id, question_id=question["id"]) }}" method="post">
+                                  {% if author_id == session[user_id] %}
+                                       <button type="submit" id="accepted_{{ answer.accepted }}" name="acceptance" value="{{ answer.accepted }}"><i class="fas fa-check-square"></i></button>
+                                   {% else %}
+                                       <button type="submit" id="accepted_{{ answer.accepted }}" name="acceptance" value="{{ answer.accepted }}" disabled="disabled"><i class="fas fa-check-square"></i></button>
+                                  {% endif %}
+                               </form>
+                           </div>
+
+                        </div>
+
+
+                        <div>
+                            <p class="message">
+                            <h4>{{ answer.message }}</h4>
+                                {% if answer.image == 1%}
+                                    {% for image in answers_images[answer.id] %}
+                                        {% if 'http' not in image.image %}
+                                            <p>
+                                                <img src="{{ url_for("get_img",filename=get_filename(image.image)) }}" alt="picture added by user" style="width: 256px"></td>
+                                            </p>
+                                        {% else %}
+                                            <p>
+                                                <img src="{{ image.image }}" alt="picture added by user" style="width: 256px"></td>
+                                            </p>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            </p>
+                            <div class="menu_row">
+                                 <a href="{{ url_for("new_answer_comment", answer_id=answer.id) }}">
+                                        <button type="button" name="add_comment" id="add_answer_comment">ADD COMMENT</button></a>
+                                 <a href="{{ url_for("edit_answer_get", question_id=question.id, answer_id=answer.id) }}">
+                                        <i class='far fa-edit'></i></a>
+                                 <a href="{{ url_for("delete_answer",question_id=question.id, answer_id=answer.id) }}"><i class='far fa-trash-alt'></i></a>
+
+                            </div>
+                        </div>
+
+                        {% if answer_comments|length > 0 %}
+                        <div class="comment">
+                            <h3 class="title_box">Comments:</h3>
+
+                            {% for comment in answer_comments %}
+                                {% if comment.answer_id == answer.id %}
+
+                                <div class="message_box">
+
+                                    <div class="info_row">
+                                        <div>{{ comment.submission_time }}</div>
+                                        {% if comment.forum_user_id != None %}
+                                            <div class="flex_row">{{ comment.user_mail }}
+                                            {% with user=comment %}{% include "reputation.html" %}{% endwith %}</div>
+                                        {% endif %}
+                                        {% if comment.edited_count %}
+                                            <div>Edited {{ comment.edited_count }} time(s)</div>
+{#                                        <<<{% else %}#}
+{#                                            <div style="visibility: hidden">Edited {{ comment.edited_count }} time(s)</div>>>>#}
+                                        {% endif %}
+                                        <div>
+                                        <a href="{{ url_for('update_comment_get', comment_id=comment.id) }}">
+                                            <i class='far fa-edit'></i>
+                                        </a></div>
+                                        <div>
+                                        <a href="{{ url_for('delete_comment', comment_id=comment.id) }}"
+                                           onclick="return confirm('Are you sure?')">
+                                            <i class='far fa-trash-alt'></i>
+                                        </a></div>
+                                    </div>
+
+                                    <div>
+                                        <p class="message">
+                                            {{ comment.message }}
+                                        </p>
+
+                                    </div>
+
+                                </div>
+                                {% endif %}
+                            {% endfor %}
+
+                        </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <a href="{{ url_for("question_page") }}"><button type="button" class="forward">&rarr; Back to List of Questions</button></a>
+
+
+    </div>
+</div>
+{% endblock %}
+

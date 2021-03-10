@@ -1,0 +1,19 @@
+{% extends 'layout_comment.html' %}
+
+{% block page_title %}Update comment to {{ item_type }}{% endblock %}
+
+{% block item %}
+    <h3>{{ item_type }}:</h3>
+    <p>{{ item.message }}</p>
+{% endblock %}
+
+{#{% block comment %}{{ comment.message }}{% endblock %}#}
+
+
+{% block action %}action = "{{ url_for('update_comment_post', comment_id=comment.id) }}"{% endblock %}
+
+{% block label %}Update comment to {{ item_type }}{% endblock %}
+
+{% block message %}{{ comment.message }}{% endblock %}
+
+{% block hidden %}name="{{ item_type }}_id" value="{{ item.id}}"{% endblock %}

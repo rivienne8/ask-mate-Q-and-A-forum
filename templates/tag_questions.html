@@ -1,0 +1,35 @@
+{% extends "index.html" %}
+
+{% block page_title %}
+    Tag Questions
+{% endblock %}
+{% block content %}
+<div>
+    <table border="1">
+        <thead>
+            <tr>
+                {% for i in range(question_tag|length) %}
+                    <th>
+                        {{ question_tag[i] }}
+                    </th>
+                {%  endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for question in questions_by_tag %}
+                <tr>
+                    {% for key in question_tag %}
+                        <td>
+                            {% if key == "message" %}
+                                {{ question[key][0:150] }}
+                            {% else %}
+                                <a href="{{ url_for("display_question", question_id=question["id"]) }}">{{ question[key] }}</a>
+                            {% endif %}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

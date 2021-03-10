@@ -1,0 +1,41 @@
+{% extends "index.html" %}
+
+{% block page_title %}Add answer{% endblock %}
+{#    <h2>Answer</h2>#}
+
+
+
+{#    <h3>Add new answer</h3>#}
+{% block content %}
+    <p>
+        <h3>QUESTION: {{ question.title }} </h3>
+        <p>{{ question.message }}</p>
+    </p>
+    <div>
+        <form method="POST" action="{{ url_for("add_answer_post", question_id=question['id']) }}" enctype="multipart/form-data">
+            <label for="message">Answer:</label>
+            <textarea name="message" id="message">{{ answer["message"] }} </textarea>
+{#            <p>add an image from disk...or paste the link to the image</p>#}
+{#            <p><input type="file" name="file" accept=".jpg,.png"></p>#}
+{#            <label for="image">IMG:</label>#}
+{#            <input type="url" name="image" id="image" placeholder="https://example.com" pattern="https://.*">#}
+{#            <br>#}
+{#            <br>#}
+
+            <p>Add an image from disk or paste a link:</p>
+            <div class="image">
+                <div class="file">
+                    <label for="file">Choose a file:</label>
+                    <input type="file" name="file" accept=".jpg,.png" multiple>
+                </div>
+                <div class="url">
+                    <label for="image_url">Paste url:</label>
+                    <input class="underline" type="url" name="image_url" id="image" placeholder="https://example.com" pattern="https://.*" > <!--value="{{ question["image"] }}" -->
+                </div>
+            </div>
+            <input class="forward" type="submit" value="&rarr; Add answer">
+        </form>
+    </div>
+
+{% endblock %}
+

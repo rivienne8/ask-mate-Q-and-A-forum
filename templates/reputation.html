@@ -1,0 +1,13 @@
+{% if user.reputation <=0 %}
+    <div class="table_cell user_reputation"><i class="fas fa-graduation-cap transparent_rep"></i>
+        {{ user.reputation }}</div>
+{% elif user.reputation >0 and user.reputation <15 %}
+    <div class="table_cell user_reputation"><i class="fas fa-graduation-cap green_rep"></i>
+        {{ user.reputation }}</div>
+{% elif user.reputation >= 15 and user.reputation <99 %}
+    <div class="table_cell user_reputation"><i class="fas fa-graduation-cap yellow_rep"></i>
+        {{ user.reputation }}</div>
+{% else %}
+    <div class="table_cell user_reputation"><i class="fas fa-graduation-cap blue_rep"></i>
+        {{ user.reputation }}</div>
+{% endif %}
