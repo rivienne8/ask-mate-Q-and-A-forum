@@ -36,7 +36,6 @@ def main_page():
     response = make_response(render_template("index.html", user_id=SESSION_ID,
                             username=SESSION_USERNAME, headers=headers,
                             questions=questions, story_keys=story_keys))
-    # return render_template("index.html", headers=headers, questions=questions, story_keys=story_keys)
     return response
 
 
@@ -409,7 +408,7 @@ def new_question_comment(question_id):
                                                      item=question,
                                                      item_type="question",
                                                      url=url_for('new_question_comment', question_id=question_id)))
-            # item_id = 'question_id'))
+
             return response
     else:
         return redirect(url_for('login_user'))
@@ -445,8 +444,7 @@ def update_comment_get(comment_id):
                                                      comment=comment,
                                                      item=question,
                                                      item_type="question"))
-            # url_forr = url_for('update_question_comment', question_id = question["id"]),
-            # url = 'update_comment_post'))
+
             return response
 
         elif comment.get("answer_id") != None:
@@ -456,7 +454,7 @@ def update_comment_get(comment_id):
                                                      comment=comment,
                                                      item=answer,
                                                      item_type="answer"))
-            # url='update_comment_post'))
+
             return response
     else:
         flash("Update option is available only for the author!", "warning")
@@ -468,7 +466,6 @@ def delete_comment(comment_id):
     user_id = data_manager.get_user_id_by_activity('comment', comment_id)
     question_id = data_manager.get_question_id_by_comment_id(comment_id)
     if session.get(FORM_USERNAME) and session[SESSION_ID] == user_id:
-        # question_id = data_manager.get_question_id_by_comment_id(comment_id)
         data_manager.delete_comment(comment_id)
         return redirect(url_for("display_question", question_id=question_id))
     else:
@@ -494,7 +491,7 @@ def new_answer_comment(answer_id):
                                                      item=answer,
                                                      item_type="answer",
                                                      url=url_for('new_answer_comment', answer_id=answer_id)))
-            # item_id = 'answer_id')
+
             return response
     else:
         return redirect(url_for('login_user'))
@@ -586,12 +583,6 @@ def registration_user_post():
 
 @app.route('/users', methods=["GET"])
 def display_users():
-    # if 'user_id' in session:
-    #     table_headers = ["ID", "User name", "Reputation", "Registration date",
-    #                      "Added question", "Added answers", "Added comments"]
-
-    # table_headers = ["ID", "User name", "Reputation", "Registration date",
-    #                  "Added question", "Added answers", "Added comments"]
     if session.get(FORM_USERNAME):
         all_users = data_manager.get_all_users()
         response = make_response(render_template('users.html', username=SESSION_USERNAME, users=all_users))

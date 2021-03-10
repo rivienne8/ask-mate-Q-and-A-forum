@@ -31,11 +31,6 @@
                 /
                 <a href="{{ url_for("registration_user") }}">Sign Up</a>
         </div>
-
-{# ten div logger_user powinien być z danymi użytkownika po zalogowaniu i z dostępnym linkiem do users page
-np.: display: flex, zawartość: mail, reputation, menu dostęne dla zalogowanego uzytkownika(linki) #}
-
-
     </header>
 
 
@@ -44,15 +39,13 @@ np.: display: flex, zawartość: mail, reputation, menu dostęne dla zalogowaneg
     </section>
 
 {% block content %}
-{#    <h1>Question Forum</h1>#}
     <div class="search">
         <form action="{{url_for("display_search_question")}}">
-{#            <label for="search_input">Search on forum:</label>#}
             <input class="search" type="text" name="search" placeholder="Search">
             <button type="submit" class="search_arrow">&rarr;</button>
         </form>
     </div>
-{#    <h3>Last questions</h3>#}
+
     <div>
         <table border="1">
         <thead>

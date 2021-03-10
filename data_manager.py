@@ -263,12 +263,6 @@ def get_comment_by_id(cursor: RealDictCursor, comment_id: int):
     return cursor.fetchone()
 
 
-@database_common.connection_handler
-# def add_question_comment(cursor: RealDictCursor, details: dict, fk_id, column: str):
-#     query = f"""
-#         INSERT INTO comment ({column}, message, submission_time)
-#         VALUES ({fk_id}, {details["comment_message"]}, '{details["submission_time"]}' )
-#         """
 def add_question_comment(cursor: RealDictCursor, details: dict):
     query = f"""
         INSERT INTO comment (question_id, message, submission_time, user_id )
@@ -387,25 +381,6 @@ def get_answer_comments_by_question_id(cursor: RealDictCursor, question_id: int)
     cursor.execute(query)
     return cursor.fetchall()
 
-
-# @database_common.connection_handler
-# def delete_question_id_form_question_tag(cursor: RealDictCursor, question_id: int):
-#     query = f"""
-#             DELETE from question_tag
-#             WHERE question_id = {question_id}"""
-#     cursor.execute(query)
-#     return
-
-
-#
-# @database_common.connection_handler
-# def get_question_id(cursor: RealDictCursor) -> list:
-#     query = f"""
-#         SELECT MAX(id)
-#         FROM question
-#         """
-#     cursor.execute(query)
-#     return cursor.fetchone().values()
 
 @database_common.connection_handler
 def add_answer(cursor: RealDictCursor, new_answer: dict):
@@ -590,9 +565,6 @@ def get_user_id_by_mail(cursor: RealDictCursor, mail: str):
 
 @database_common.connection_handler
 def get_all_users(cursor: RealDictCursor):
-    # query = f"""
-    #     SELECT *
-    #     FROM forum_user"""
 
     query = f"""
     select forum_user.id, forum_user.mail, 
@@ -608,15 +580,6 @@ def get_all_users(cursor: RealDictCursor):
     """
     cursor.execute(query)
     return cursor.fetchall()
-
-
-# @database_common.connection_handler
-# def get_all_users_basic_info(cursor: RealDictCursor):
-#     query = f"""
-#         SELECT id, mail, reputation
-#         FROM forum_user"""
-#     cursor.execute(query)
-#     return cursor.fetchall()
 
 
 @database_common.connection_handler
@@ -682,13 +645,6 @@ def get_comments_by_user(cursor: RealDictCursor, user_id):
         ORDER BY comment.submission_time DESC
         """
 
-    #
-    #
-    # query = f"""
-    #         SELECT *
-    #         FROM comment
-    #         WHERE user_id = {user_id}
-    #         ORDER BY submission_time DESC"""
     cursor.execute(query)
     return cursor.fetchall()
 

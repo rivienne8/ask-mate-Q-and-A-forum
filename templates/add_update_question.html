@@ -12,10 +12,8 @@
 {% block content %}
     <div>
         {% if question["id"] == None %}
-    {#        <h1>Add new question</h1>#}
             <form action="{{ url_for("add_question_post") }}" method="post" enctype="multipart/form-data">
         {% else %}
-    {#        <h1>Update question</h1>#}
             <form action="{{ url_for("edit_question_post", question_id=question['id']) }}" method="post" enctype="multipart/form-data">
         {% endif %}
 

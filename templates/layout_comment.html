@@ -7,10 +7,6 @@
         {% block item %}{% endblock %}
     </p>
 
-{#    <p>#}
-{#        {% block comment %}{% endblock %}#}
-{#    </p>#}
-
     <form {% block action %}{% endblock %} method="POST">
         <label for="comment_message">{% block label %}{% endblock %}</label><br>
         <textarea id="comment_message"  rows="7" type="text" maxlength="500" name="comment_message"

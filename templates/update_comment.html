@@ -7,9 +7,6 @@
     <p>{{ item.message }}</p>
 {% endblock %}
 
-{#{% block comment %}{{ comment.message }}{% endblock %}#}
-
-
 {% block action %}action = "{{ url_for('update_comment_post', comment_id=comment.id) }}"{% endblock %}
 
 {% block label %}Update comment to {{ item_type }}{% endblock %}
